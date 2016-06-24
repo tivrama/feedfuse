@@ -28,6 +28,7 @@ var router            = express.Router();      // Creates Router
 var twitterRouter     = express.Router();      // Creates Twitter Router
 var instagramRouter   = express.Router();      // Creates Instagram Router
 var facebookRouter    = express.Router();      // Creates Facebook Router
+var redditRouter      = express.Router();      // Creates Reddit Router
 
 // Prefixes all routes with /api
 app.use('/api', router);
@@ -37,12 +38,14 @@ app.use('/auth/instagram', instagramRouter);    // Sets /auth/instagram/ route t
 app.use('/api/instagram', instagramRouter);     // Sets /api/instagrapm/ route to use instagramRouter
 app.use('/auth/facebook', facebookRouter);      // Not currently in use
 app.use('/auth/facebook', facebookRouter);      // Not currently in use
+app.use('/api/reddit', redditRouter);           // Sets /api/reddit route to use redditRouter
 
 // Configures our routes
 require('./routes/routes.js')(app);
 require('./routes/twitter.js')(app);
 require('./routes/instagram.js')(app);
 require('./routes/facebook.js')(app);
+require('./routes/reddit.js')(app);
 
 // Starts app
 app.listen(port);
