@@ -1,4 +1,4 @@
-angular.module('ff.controllers').controller('FeedController', function($scope, Feed, Twitter, Instagram, $timeout, $q, $state) {
+angular.module('ff.controllers').controller('FeedController', function($scope, Feed, Twitter, Instagram, Reddit, $timeout, $q, $state) {
   
   $scope.loading = true; // Flag for showing/hiding loading spinner GIF
 
@@ -10,6 +10,10 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
 
     if (newQuery !== null) {                     // Makes sure there is a search term
       $scope.query = newQuery; // Grab search query
+
+      Reddit.getData($scope.query).then(function(results) {
+        console.log(results);
+      });
 
       Twitter.getData($scope.query).then(function(results) {
         // If Twitter was authorized, store the returned results array
