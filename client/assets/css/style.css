@@ -584,7 +584,6 @@ input[type='text'] {
   clear: both;
 }
 .alert {
-  /*border-radius: 10px;*/
   display: block;
   margin-bottom: 20px;
   padding: 10px;

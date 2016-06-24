@@ -21,7 +21,7 @@ module.exports = function(app) {
   app.get('/auth/twitter', function(req, res) {                       // Handles /auth/twitter route from from home.html
     twitter.getRequestToken(function(error, requestToken, requestTokenSecret, results){   // Calls our new twitterAPI line 10
       if (error) {                                                    // The params create request tokens to send along to Twitter
-        console.log("Error getting OAuth request token : " + error);
+        console.log("Error getting OAuth request token : " + error.data);
       } else {
         req.session.twitter = {};                                     // Creates twitter session object
         req.session.twitter.requestToken = requestToken;              // Stores request token in session

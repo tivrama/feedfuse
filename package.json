@@ -4,6 +4,7 @@
   "description": "View all your social media in one feed",
   "main": "server/server.js",
   "scripts": {
+    "start": "nodemon server/server.js",
     "test": "npm test"
   },
   "repository": {
