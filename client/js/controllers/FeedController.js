@@ -11,19 +11,7 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
     if (newQuery !== null) {                     // Makes sure there is a search term
       $scope.query = newQuery; // Grab search query
 
-      //<START-------------------reddit testing---------------------------->
-      Reddit.getData($scope.query).then(function(results) {
-        var data = results.data.data.children;
-        if (data.length > 10) {
-          data = data.slice(0, 10);
-        }
-        console.log(data);
-
-      });
-      //<END---------------------reddit testing---------------------------->
-
-
-// twitter promise
+     // twitter promise
      var twitterGet = Twitter.getData($scope.query).then(function(results) {
        // If Twitter was authorized, store the returned results array
        // If not, set it to undefined
@@ -66,7 +54,6 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
 
     if (twitter !== null) {              // Checks to see if Twitter data was passed
       // Convert Twitter timestamp to be consistent with Instagram as epoch time
-      
       twitter.forEach(function(val){
         var time = val.created_at;
         var epochTime = epochConverter(time); // Converts created_at string to an epoch time integer
@@ -79,10 +66,8 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
       });
     };
 
-//----------reddit----------------------------------------
     if (reddit !== null) {              // Checks to see if Reddit data was passed
       // Convert Reddit timestamp to be consistent with Twitter as epoch time
-      
       reddit.forEach(function(val){
         var time = val.data.created_utc; //EXAMPLE 1305208232.0
         val.created_at = parseInt(time) * 1000; // Convert Reddit created_at time to milliseconds
@@ -91,16 +76,29 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
         $scope.unsorted.push(val); // Push each post into the unsorted array
       });
     };
-//----------end-reddit------------------------------------    
 
     $scope.reverseSort = _.sortBy($scope.unsorted, function(val){
       return val.created_at;
     });
     
-    $scope.sorted = $scope.reverseSort.reverse(); // Reverses sorted array so newest posts are on top
+    $scope.firstSort = $scope.reverseSort.reverse(); // Reverses sorted array so newest posts are on top
+
+    //------begin shuffle--------------------------------------------
+
+    function shuffleRedditAndTwitter(sorted) {
+      var shuffled = [];
+      
+
+      return shuffled;
+    };
+
+    $scope.sorted = shuffleRedditAndTwitter($scope.firstSort);// = shuffled reddit and twitter
     console.log('soted everything: ', $scope.sorted);
+    //-------end shuffle---------------------------------------------
+
+
     // Not needed for Reddit
-    $scope.callWidgets(); // Call for Twitter and Instagram widgets to activate embedded post styling
+    $scope.callWidgets(); // Call for Twitter widget to activate embedded post styling
 
     function epochConverter(str){
       // Convert Twitter's original created_at timestamp string into epoch time
