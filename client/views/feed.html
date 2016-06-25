@@ -13,7 +13,11 @@
     <!-- REDDIT -->
     <div ng-if="post.source_network=='reddit'">
         <div class="reddit-media">
-            <img src='{{ post.data.thumbnail }}'></img><br>
+
+
+            <img ng-src='{{ post.data.thumbnail }}' on-error="../assets/img/FF4D00-0..png"></img><br>
+
+
             <a href='{{ post.data.url }}' target='_blank' class='title'>{{ post.data.title }}</a>
             <p class='author'> {{ post.data.author }}</p>
             <p> {{ post.data.selftext }}</p>
