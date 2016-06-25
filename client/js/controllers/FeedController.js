@@ -11,51 +11,7 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
     if (newQuery !== null) {                     // Makes sure there is a search term
       $scope.query = newQuery; // Grab search query
 
-<<<<<<< 4a2444db1c7949cb4c3dcfb341c75d4d48792087
-     // twitter promise
-=======
-      //<START-------------------reddit testing---------------------------->
-      Reddit.getData($scope.query).then(function(results) {
-        var data = results.data.data.children;
-        if (data.length > 10) {
-          data = data.slice(0, 10);
-        }
-        console.log(data);
 
-      });
-      //<END---------------------reddit testing---------------------------->
-
-<<<<<<< 3f65116f39ce793b65f5fd97ad9af8726c5d852f
-
-// twitter promise
->>>>>>> fix reddit, twitter promises, send user 'home' if no results
-     var twitterGet = Twitter.getData($scope.query).then(function(results) {
-       // If Twitter was authorized, store the returned results array
-       // If not, set it to undefined
-
-       if (!results.data) {
-         $scope.twitterData = undefined;
-       } else {
-         $scope.twitterData = results.data;
-       }
-     });
-
-     //reddit promise
-     var redditGet =  Reddit.getData($scope.query).then(function(results) {
-       var data = results.data.data.children;
-       //store results in $scope for sort
-       //check if data.length is greater than 10
-       if (data.length > 10) {
-         data = data.slice(0, 10);
-       }
-       $scope.redditData = data;
-       console.log($scope.redditData, 'redditData in presort');
-     });
-
-     $q.all([twitterGet, redditGet]).then(function() {
-       $scope.sort($scope.twitterData, $scope.redditData);
-     });
-=======
       // twitter promise
       var twitterGet = Twitter.getData($scope.query).then(function(results) {
         // If Twitter was authorized, store the returned results array
