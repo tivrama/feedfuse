@@ -118,7 +118,6 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
       // console.log($scope.redditData, "redditData")
       // //<END-------------------CHANGE INSTAGRAM TO REDDIT---------------->
       // //<END-------------------CHANGE INSTAGRAM TO REDDIT---------------->
->>>>>>> add comments
 
     }
   }, true);
@@ -134,10 +133,6 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
 
     $scope.unsorted = []; // Initialize unsorted array
 
-<<<<<<< 3f65116f39ce793b65f5fd97ad9af8726c5d852f
-
-=======
->>>>>>> add comments
 
     if (twitter !== null) {              // Checks to see if Twitter data was passed
       // Convert Twitter timestamp to be consistent with Instagram as epoch time
@@ -227,6 +222,20 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
         $scope.refreshWidgets();
       }, 2500);
     });
+  };
+
+  //set filters to true
+  $scope.twitterShow = true;
+  $scope.redditShow = true;
+
+  //toggle filters
+  $scope.toggleTwitterShow = function() {
+    $scope.twitterShow = !$scope.twitterShow;
+    $scope.refreshWidgets();
+  };
+
+  $scope.toggleRedditShow = function() {
+    $scope.redditShow = !$scope.redditShow;
   };
   
 });
