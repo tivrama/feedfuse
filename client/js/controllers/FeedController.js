@@ -22,41 +22,10 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
       });
       //<END---------------------reddit testing---------------------------->
 
-<<<<<<< 1688d5d9e5f66a7cf6f842a5f0023edf0d9296d4
-
-// twitter promise
-     var twitterGet = Twitter.getData($scope.query).then(function(results) {
-       // If Twitter was authorized, store the returned results array
-       // If not, set it to undefined
-
-       if (!results.data) {
-         $scope.twitterData = undefined;
-       } else {
-         $scope.twitterData = results.data;
-       }
-     });
-
-     //reddit promise
-     var redditGet =  Reddit.getData($scope.query).then(function(results) {
-       var data = results.data.data.children;
-       //store results in $scope for sort
-       //check if data.length is greater than 10
-       if (data.length > 10) {
-         data = data.slice(0, 10);
-       }
-       $scope.redditData = data;
-       console.log($scope.redditData, 'redditData in presort');
-     });
-
-     $q.all([twitterGet, redditGet]).then(function() {
-       $scope.sort($scope.twitterData, $scope.redditData);
-     });
-=======
       // twitter promise
       var twitterGet = Twitter.getData($scope.query).then(function(results) {
         // If Twitter was authorized, store the returned results array
         // If not, set it to undefined
-
         if (!results.data) {
           $scope.twitterData = undefined;
         } else {
@@ -70,8 +39,10 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
         //store results in $scope for sort
         //check if data.length is greater than 10
         if (data.length > 10) {
+          //get first 10 results
           data = data.slice(0, 10);
         }
+        //add results to $scope
         $scope.redditData = data;
         console.log($scope.redditData, 'redditData in presort');
       });
@@ -158,7 +129,6 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
       // //<END-------------------CHANGE INSTAGRAM TO REDDIT---------------->
       // //<END-------------------CHANGE INSTAGRAM TO REDDIT---------------->
 
->>>>>>> fix reddit, twitter promises, send user 'home' if no results
     }
   }, true);
   
@@ -172,24 +142,7 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
     // reddit = redditData array
 
     $scope.unsorted = []; // Initialize unsorted array
-<<<<<<< 1688d5d9e5f66a7cf6f842a5f0023edf0d9296d4
-=======
-    console.log('reddit', reddit);
-    console.log('twitter', twitter);
-    
-    // if (instagram !== null) {
-    //   // Convert Instagram timestamp to be consistent with Twitter as epoch time
 
-    //   instagram.forEach(function(val){
-    //     var time = val.created_time;
-
-    //     val.created_at = parseInt(time) * 1000; // Convert Instagram created_at time to milliseconds
-    //     val.source_network = 'instagram'; // Add flag for data source
-        
-    //     $scope.unsorted.push(val); // Push each post into the unsorted array
-    //   });
-    // };
->>>>>>> fix reddit, twitter promises, send user 'home' if no results
 
     if (twitter !== null) {              // Checks to see if Twitter data was passed
       // Convert Twitter timestamp to be consistent with Instagram as epoch time
