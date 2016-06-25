@@ -96,23 +96,12 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
   // $scope.sort = function(twitter, instagram) {
   $scope.sort = function(twitter, reddit) {
     // twitter = twitterData array
-    // instagram = instagramData array
     // reddit = redditData array
+    console.log('reddit: ', reddit);
 
     $scope.unsorted = []; // Initialize unsorted array
     
-    // if (instagram !== null) {
-    //   // Convert Instagram timestamp to be consistent with Twitter as epoch time
 
-    //   instagram.forEach(function(val){
-    //     var time = val.created_time;
-
-    //     val.created_at = parseInt(time) * 1000; // Convert Instagram created_at time to milliseconds
-    //     val.source_network = 'instagram'; // Add flag for data source
-        
-    //     $scope.unsorted.push(val); // Push each post into the unsorted array
-    //   });
-    // };
 
     if (twitter !== null) {              // Checks to see if Twitter data was passed
       // Convert Twitter timestamp to be consistent with Instagram as epoch time
@@ -151,8 +140,8 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
     });
     
     $scope.sorted = $scope.reverseSort.reverse(); // Reverses sorted array so newest posts are on top
-
-    //NEEDED FOR REDDIT??
+    console.log('soted everything: ', $scope.sorted);
+    // Not needed for Reddit
     $scope.callWidgets(); // Call for Twitter and Instagram widgets to activate embedded post styling
 
     function epochConverter(str){
@@ -184,7 +173,7 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
   $scope.callWidgets = function() {
     var twitterWidget = Feed.getTwitterWidget();
     var instagramWidget = Feed.getInstagramWidget();
-    // var redditWidget = Feed.getRedditWidget();  // VARIFY USE
+    // Not needed for Reddit
 
     // Resolve widget calls before refreshing widgets and activating embedded post styling
     // Timeout is to allow time for photos (if any) to download
