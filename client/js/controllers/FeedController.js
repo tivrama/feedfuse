@@ -87,8 +87,10 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
 
     function shuffleRedditAndTwitter(sorted) {
       var shuffled = [];
-      
-
+      for (var i = 0; i < 10; i++) {
+        shuffled.push(sorted[i]);
+        shuffled.push(sorted[i+10]);
+      }
       return shuffled;
     };
 
