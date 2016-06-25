@@ -12,11 +12,11 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
       $scope.query = newQuery; // Grab search query
 
 
+
       // twitter promise
       var twitterGet = Twitter.getData($scope.query).then(function(results) {
         // If Twitter was authorized, store the returned results array
         // If not, set it to undefined
-
         if (!results.data) {
           $scope.twitterData = undefined;
         } else {
@@ -30,8 +30,10 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
         //store results in $scope for sort
         //check if data.length is greater than 10
         if (data.length > 10) {
+          //get first 10 results
           data = data.slice(0, 10);
         }
+        //add results to $scope
         $scope.redditData = data;
         console.log($scope.redditData, 'redditData in presort');
       });
@@ -47,7 +49,7 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
         $scope.sort($scope.twitterData, $scope.redditData);
       });
 
-    }
+
   }, true);
   
 
