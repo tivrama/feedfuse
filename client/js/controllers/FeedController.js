@@ -152,5 +152,19 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
       }, 2500);
     });
   };
+
+  //set filters to true
+  $scope.twitterShow = true;
+  $scope.redditShow = true;
+
+  //toggle filters
+  $scope.toggleTwitterShow = function() {
+    $scope.twitterShow = !$scope.twitterShow;
+    $scope.refreshWidgets();
+  };
+
+  $scope.toggleRedditShow = function() {
+    $scope.redditShow = !$scope.redditShow;
+  };
   
 });

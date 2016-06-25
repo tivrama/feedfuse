@@ -457,6 +457,10 @@ footer {
   background: #55acee;
   color: #fff;
 }
+.btn-twitter .filter{
+  background: green;
+  color: #fff;
+}
 .btn-twitter:hover {
   background: rgb(64, 159, 231);
 }
@@ -465,6 +469,15 @@ footer {
   color: #fff;
 }
 .btn-instagram:hover {
+  background: rgb(220, 30, 93);
+}
+
+.btn-reddit {
+  background: #e1306c;
+  color: #fff;
+}
+
+.btn-reddit:hover {
   background: rgb(220, 30, 93);
 }
 .btn:last-child {
@@ -577,6 +590,25 @@ input[type='text'] {
   font-size: 1.5em;
 }
 
+.filter {
+  display: inline-block;
+  text-align: center
+}
+#filterReddit {
+  background: url("http://icons.iconarchive.com/icons/limav/flat-gradient-social/512/Reddit-icon.png");
+  color: #fff;
+  background-size: 100%;
+  height: 50px;
+  width: 50px
+
+}
+#filterTwitter {
+  background: url("https://cdn1.iconfinder.com/data/icons/logotypes/32/twitter-128.png");
+  background-size: 100%;
+  color: #fff;
+  height: 50px;
+  width: 50px
+}
 
 .feed-post {
   position: relative;
