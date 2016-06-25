@@ -134,7 +134,7 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
       // Convert Reddit timestamp to be consistent with Twitter as epoch time
       
       reddit.forEach(function(val){
-        var time = val.created_utc; //CHECK NAME OF CREATION DATE ON REDIT OBJECT - js
+        var time = val.created_utc; //EXAMPLE 1305208232.0
         // var offset = val.user.utc_offset;
         var epochTime = epochConverter(time); // Converts created_at string to an epoch time integer
         var correctedTime = epochTime;
