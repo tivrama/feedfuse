@@ -13,7 +13,12 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
 
       //<START-------------------reddit testing---------------------------->
       Reddit.getData($scope.query).then(function(results) {
-        console.log(results.data.data.children);
+        var data = results.data.data.children;
+        if (data.length > 10) {
+          data = data.slice(0, 10);
+        }
+        console.log(data);
+
       });
       //<END---------------------reddit testing---------------------------->
 
@@ -35,6 +40,10 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
           Reddit.getData($scope.query).then(function(results) {
             var data = results.data.data.children;
             //store results in $scope for sort
+            //check if data.length is greater than 10
+            if (data.length > 10) {
+              data = data.slice(0,9);
+            }
             $scope.redditData = data;
           });
         }).then(function(){
