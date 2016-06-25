@@ -134,6 +134,7 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
     $scope.unsorted = []; // Initialize unsorted array
 
 
+
     if (twitter !== null) {              // Checks to see if Twitter data was passed
       // Convert Twitter timestamp to be consistent with Instagram as epoch time
       twitter.forEach(function(val){
