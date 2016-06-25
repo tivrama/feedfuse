@@ -142,6 +142,14 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
     // reddit = redditData array
 
     $scope.unsorted = []; // Initialize unsorted array
+<<<<<<< HEAD
+=======
+    console.log('reddit', reddit);
+    console.log('twitter', twitter);
+    
+    // if (instagram !== null) {
+    //   // Convert Instagram timestamp to be consistent with Twitter as epoch time
+>>>>>>> 90cc6204d9999dfdf7e79e72f7c15d1677ce7860
 
 
     if (twitter !== null) {              // Checks to see if Twitter data was passed
