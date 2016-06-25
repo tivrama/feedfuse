@@ -93,30 +93,33 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
   }, true);
   
   // Sort function organizes the API responses from Twitter and Instagram into one final sorted array
-  $scope.sort = function(twitter, instagram) {
+  // $scope.sort = function(twitter, instagram) {
+  $scope.sort = function(twitter, reddit) {
     // twitter = twitterData array
     // instagram = instagramData array
+    // reddit = redditData array
 
     $scope.unsorted = []; // Initialize unsorted array
     
-    if (instagram !== null) {
-      // Convert Instagram timestamp to be consistent with Twitter as epoch time
+    // if (instagram !== null) {
+    //   // Convert Instagram timestamp to be consistent with Twitter as epoch time
 
-      instagram.forEach(function(val){
-        var time = val.created_time;
+    //   instagram.forEach(function(val){
+    //     var time = val.created_time;
 
-        val.created_at = parseInt(time) * 1000; // Convert Instagram created_at time to milliseconds
-        val.source_network = 'instagram'; // Add flag for data source
+    //     val.created_at = parseInt(time) * 1000; // Convert Instagram created_at time to milliseconds
+    //     val.source_network = 'instagram'; // Add flag for data source
         
-        $scope.unsorted.push(val); // Push each post into the unsorted array
-      });
-    };
+    //     $scope.unsorted.push(val); // Push each post into the unsorted array
+    //   });
+    // };
 
     if (twitter !== null) {              // Checks to see if Twitter data was passed
       // Convert Twitter timestamp to be consistent with Instagram as epoch time
       
       twitter.forEach(function(val){
         var time = val.created_at;
+        console.log('twitter time: ', time);
         // var offset = val.user.utc_offset;
         var epochTime = epochConverter(time); // Converts created_at string to an epoch time integer
         var correctedTime = epochTime;
@@ -127,13 +130,29 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
         $scope.unsorted.push(val); // Push each tweet into the unsorted array
       });
     };
-    
+
+//----------reddit----------------------------------------
+    if (reddit !== null) {              // Checks to see if Reddit data was passed
+      // Convert Reddit timestamp to be consistent with Twitter as epoch time
+      console.log('What is Reddit: ', reddit);
+      
+      reddit.forEach(function(val){
+        var time = val.created_utc; //EXAMPLE 1305208232.0
+        val.created_at = parseInt(time) * 1000; // Convert Reddit created_at time to milliseconds
+        val.source_network = 'reddit'; // Add flag for data source
+        
+        $scope.unsorted.push(val); // Push each post into the unsorted array
+      });
+    };
+//----------end-reddit------------------------------------    
+
     $scope.reverseSort = _.sortBy($scope.unsorted, function(val){
       return val.created_at;
     });
     
     $scope.sorted = $scope.reverseSort.reverse(); // Reverses sorted array so newest posts are on top
 
+    //NEEDED FOR REDDIT??
     $scope.callWidgets(); // Call for Twitter and Instagram widgets to activate embedded post styling
 
     function epochConverter(str){
@@ -151,7 +170,7 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
         Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5,
         Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11
       };
-      
+      console.log('epochConverter: ', Date.UTC(year, mnths[mon], day, hour, min, sec)); //1466820892000
       return Date.UTC(year, mnths[mon], day, hour, min, sec);
     };
   };
@@ -165,6 +184,7 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
   $scope.callWidgets = function() {
     var twitterWidget = Feed.getTwitterWidget();
     var instagramWidget = Feed.getInstagramWidget();
+    // var redditWidget = Feed.getRedditWidget();  // VARIFY USE
 
     // Resolve widget calls before refreshing widgets and activating embedded post styling
     // Timeout is to allow time for photos (if any) to download
