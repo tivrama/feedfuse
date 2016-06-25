@@ -46,6 +46,7 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
         }
         $scope.sort($scope.twitterData, $scope.redditData);
       });
+
     }
   }, true);
   
@@ -59,6 +60,7 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
     // reddit = redditData array
 
     $scope.unsorted = []; // Initialize unsorted array
+
 
 
     if (twitter !== null) {              // Checks to see if Twitter data was passed
