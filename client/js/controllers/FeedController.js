@@ -108,7 +108,7 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
       
       twitter.forEach(function(val){
         var time = val.created_at;
-        console.log('twitter time: ', time);
+        // console.log('twitter time: ', time);
         // var offset = val.user.utc_offset;
         var epochTime = epochConverter(time); // Converts created_at string to an epoch time integer
         var correctedTime = epochTime;
@@ -159,7 +159,7 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
         Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5,
         Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11
       };
-      console.log('epochConverter: ', Date.UTC(year, mnths[mon], day, hour, min, sec)); //1466820892000
+      // console.log('epochConverter: ', Date.UTC(year, mnths[mon], day, hour, min, sec)); //1466820892000
       return Date.UTC(year, mnths[mon], day, hour, min, sec);
     };
   };
