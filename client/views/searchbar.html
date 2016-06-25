@@ -1,0 +1,17 @@
+<form name="search" novalidate>
+  <div class="query-input-group">
+    <fieldset>
+      <label for="query">#</label>
+      <input type="text" id="query" name="query" placeholder="Search for a tag..." ng-model="query" ng-pattern="/^[#a-zA-Z0-9]*$/" required>
+    </fieldset>
+  </div>
+
+  <div class="alert-container">
+    <span class="alert alert-invalid" ng-show="search.query.$dirty && search.query.$error.required">Query is required.</span>
+    <span class="alert alert-invalid" ng-show="search.query.$dirty && twitterCheckShow == false">At least one authorized social media account is required.</span>
+    <span class="alert alert-invalid" ng-show="search.query.$dirty && search.query.$invalid">Query is invalid (no special characters).</span>
+    <span class="alert alert-invalid" ng-show="dataExists==false">No data found. Try again.</span>
+  </div>
+
+  <button type="submit" class="btn btn-primary" ui-sref="feed" ui-sref-opts="{reload: true}" ng-click="processSearch(query)" ng-disabled="search.query.$pristine || search.query.$invalid || (search.query.$invalid && search.query.$error.required) && twitterCheckShow == false">Fuse Feeds</button>
+</form>

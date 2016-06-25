@@ -12,7 +12,6 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
       $scope.query = newQuery; // Grab search query
 
 
-
       // twitter promise
       var twitterGet = Twitter.getData($scope.query).then(function(results) {
         // If Twitter was authorized, store the returned results array
@@ -114,7 +113,6 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
     };
 
     $scope.sorted = shuffleRedditAndTwitter($scope.firstSort);// = shuffled reddit and twitter
-    console.log('soted everything: ', $scope.sorted);
     //-------end shuffle---------------------------------------------
 
 
