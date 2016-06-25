@@ -50,93 +50,25 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
      $q.all([twitterGet, redditGet]).then(function() {
        $scope.sort($scope.twitterData, $scope.redditData);
      });
-      // //<START-------------------CHANGE INSTAGRAM TO REDDIT---------------->
-      // //<START-------------------CHANGE INSTAGRAM TO REDDIT---------------->
-
-      // Twitter.getData($scope.query).then(function(results) {
-      //   // If Twitter was authorized, store the returned results array
-      //   // If not, set it to undefined
-
-      //   if (!results.data) {
-      //     $scope.twitterData = undefined;
-      //   } else {
-      //     $scope.twitterData = results.data;
-      //   }
-      // }).then(function(){
-      //     // Get search results from reddit
-      //     Reddit.getData($scope.query).then(function(results) {
-      //       var data = results.data.data.children;
-      //       //store results in $scope for sort
-      //       //check if data.length is greater than 10
-      //       if (data.length > 10) {
-      //         data = data.slice(0,9);
-      //       }
-      //       $scope.redditData = data;
-      //     });
-      //   }).then(function(){
-      //     if ($scope.twitterData !== undefined && $scope.redditData !== undefined) {
-      //       // Both Twitter and reddit accounts were authorized
-
-      //       // Check whether data for both actually exists
-      //       if ($scope.twitterData.length <= 0 && $scope.redditData.length <= 0) {
-      //         Feed.setDataExists(false); // Set flag for no data found alert
-      //         $state.go('home'); // Return state to home
-      //       } else {
-      //         $scope.sort($scope.twitterData, $scope.redditData); // Invoke sort function
-      //       }
-      //     } else if ($scope.twitterData !== undefined && $scope.redditData === undefined) {
-      //       // Only Twitter authorized
-
-      //       // Check whether Twitter data actually exists
-      //       if ($scope.twitterData.length <= 0){
-      //         Feed.setDataExists(false); // Set flag for no data found alert
-      //         $state.go('home'); // Return state to home
-      //       } else {
-      //         $scope.sort($scope.twitterData, null); // Invoke sort function
-      //       }
-      //     } else if ($scope.redditData !== undefined && $scope.twitterData === undefined) {
-      //       // Only reddit authorized
-
-      //       // Check whether reddit data actually exists
-      //       if ($scope.redditData.length <= 0){
-      //         Feed.setDataExists(false); // Set flag for no data found alert
-      //         $state.go('home'); // Return state to home
-      //       } else {
-      //         $scope.sort(null, $scope.redditData); // Invoke sort function
-      //       }
-      //     }
-      //   }).catch(function(err) {
-      //     // reddit catch()
-      //     console.error(err);
-      //   })
-      // .catch(function(err) {
-      //   // Twitter catch()
-      //   console.error(err);
-      // });
-      // //<END-------------------CHANGE INSTAGRAM TO REDDIT---------------->
-      // //<END-------------------CHANGE INSTAGRAM TO REDDIT---------------->
-
     }
   }, true);
   
+
+
+
   // Sort function organizes the API responses from Twitter and Instagram into one final sorted array
   // $scope.sort = function(twitter, instagram) {
   $scope.sort = function(twitter, reddit) {
     // twitter = twitterData array
     // reddit = redditData array
-    // console.log('reddit inside sort: ', reddit);
 
     $scope.unsorted = []; // Initialize unsorted array
-    
-
 
     if (twitter !== null) {              // Checks to see if Twitter data was passed
       // Convert Twitter timestamp to be consistent with Instagram as epoch time
       
       twitter.forEach(function(val){
         var time = val.created_at;
-        // console.log('twitter time: ', time);
-        // var offset = val.user.utc_offset;
         var epochTime = epochConverter(time); // Converts created_at string to an epoch time integer
         var correctedTime = epochTime;
 
