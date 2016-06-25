@@ -93,9 +93,10 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
   }, true);
   
   // Sort function organizes the API responses from Twitter and Instagram into one final sorted array
-  $scope.sort = function(twitter, instagram) {
+  $scope.sort = function(twitter, instagram, reddit) {
     // twitter = twitterData array
     // instagram = instagramData array
+    // reddit = redditData array
 
     $scope.unsorted = []; // Initialize unsorted array
     
@@ -127,13 +128,32 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
         $scope.unsorted.push(val); // Push each tweet into the unsorted array
       });
     };
-    
+
+//----------reddit----------------------------------------
+    if (reddit !== null) {              // Checks to see if Reddit data was passed
+      // Convert Reddit timestamp to be consistent with Twitter as epoch time
+      
+      reddit.forEach(function(val){
+        var time = val.created_utc; //CHECK NAME OF CREATION DATE ON REDIT OBJECT - js
+        // var offset = val.user.utc_offset;
+        var epochTime = epochConverter(time); // Converts created_at string to an epoch time integer
+        var correctedTime = epochTime;
+
+        val.created_utc = parseInt(correctedTime); // Turns epoch time to a string again after last line
+        val.source_network = 'reddit'; // Adds flag for data source
+        
+        $scope.unsorted.push(val); // Push each entry into the unsorted array
+      });
+    };
+//----------end-reddit------------------------------------    
+
     $scope.reverseSort = _.sortBy($scope.unsorted, function(val){
       return val.created_at;
     });
     
     $scope.sorted = $scope.reverseSort.reverse(); // Reverses sorted array so newest posts are on top
 
+    //NEEDED FOR REDDIT??
     $scope.callWidgets(); // Call for Twitter and Instagram widgets to activate embedded post styling
 
     function epochConverter(str){
@@ -165,6 +185,7 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
   $scope.callWidgets = function() {
     var twitterWidget = Feed.getTwitterWidget();
     var instagramWidget = Feed.getInstagramWidget();
+    // var redditWidget = Feed.getRedditWidget();  // VARIFY USE
 
     // Resolve widget calls before refreshing widgets and activating embedded post styling
     // Timeout is to allow time for photos (if any) to download
