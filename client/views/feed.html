@@ -6,24 +6,18 @@
 
 <div class="container">
   <div class="feed-post" ng-repeat="post in sorted">
+    <!-- TWITTER -->
     <div ng-if="post.source_network=='twitter'" >
         <blockquote twitter post="post" class="twitter-tweet"></blockquote>
     </div>
-
-    <div ng-if="post.source_network=='instagram'">
-        <blockquote data-instgrm-captioned data-instgrm-version="7" class="instagram-media">
-        
-            <!-- INSTAGRAM -->
-            <div style="padding:8px;">
-                <div ng-style="{ 'background-image': 'url('+ '{{ post.images.low_resolution.url }}' }" style="background-size: cover; line-height:0; margin-top:40px; padding:50% 0; text-align:center; width:100%;">
-                    <div style=" background:transparent; display:block; height:44px; margin:0 auto -44px; position:relative; top:-22px; width:44px;"></div>
-                    </div>
-                <p style=" margin:8px 0 0 0; padding:0 4px;"> <a ng-href="{{ post.link }}" style=" color:#000; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none; word-wrap:break-word;" target="_blank">{{ post.caption.text }}</a></p>
-                <p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;">A photo posted by {{  post.full_name }} (@{{  post.user.username }}) on
-                    <time style=" font-family:Arial,sans-serif; font-size:14px; line-height:17px;">{{ post.created_at | date: "MMM d, yyyy 'at' h:mma"}}</time>
-                </p>
-            </div>
-        </blockquote>
+    <!-- REDDIT -->
+    <div ng-if="post.source_network=='reddit'">
+        <div class="reddit-media">
+            <img src='{{ post.data.thumbnail }}'></img><br>
+            <a href='{{ post.data.url }}' target='_blank' class='title'>{{ post.data.title }}</a>
+            <p class='author'> {{ post.data.author }}</p>
+            <p> {{ post.data.selftext }}</p>
+        </div>
     </div>
   </div>
 </div>
