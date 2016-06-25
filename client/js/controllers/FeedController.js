@@ -22,6 +22,7 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
       });
       //<END---------------------reddit testing---------------------------->
 
+<<<<<<< 1688d5d9e5f66a7cf6f842a5f0023edf0d9296d4
 
 // twitter promise
      var twitterGet = Twitter.getData($scope.query).then(function(results) {
@@ -50,6 +51,114 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
      $q.all([twitterGet, redditGet]).then(function() {
        $scope.sort($scope.twitterData, $scope.redditData);
      });
+=======
+      // twitter promise
+      var twitterGet = Twitter.getData($scope.query).then(function(results) {
+        // If Twitter was authorized, store the returned results array
+        // If not, set it to undefined
+
+        if (!results.data) {
+          $scope.twitterData = undefined;
+        } else {
+          $scope.twitterData = results.data;
+        }
+      });
+
+      //reddit promise
+      var redditGet =  Reddit.getData($scope.query).then(function(results) {
+        var data = results.data.data.children;
+        //store results in $scope for sort
+        //check if data.length is greater than 10
+        if (data.length > 10) {
+          data = data.slice(0, 10);
+        }
+        $scope.redditData = data;
+        console.log($scope.redditData, 'redditData in presort');
+      });
+
+      //when both twitter and reddit come back
+      $q.all([twitterGet, redditGet]).then(function() {
+        //check if no results
+        console.log('rData', $scope.redditData, 'tData', $scope.twitterData);
+        if (!$scope.twitterData && !$scope.redditData) {
+          Feed.setDataExists(false); // Set flag for no data found alert
+          $state.go('home'); // Return state to home
+        }
+        $scope.sort($scope.twitterData, $scope.redditData);
+      });
+
+
+
+
+      // //<START-------------------CHANGE INSTAGRAM TO REDDIT---------------->
+      // //<START-------------------CHANGE INSTAGRAM TO REDDIT---------------->
+
+      // Twitter.getData($scope.query).then(function(results) {
+      //   // If Twitter was authorized, store the returned results array
+      //   // If not, set it to undefined
+
+      //   if (!results.data) {
+      //     $scope.twitterData = undefined;
+      //   } else {
+      //     $scope.twitterData = results.data;
+      //   }
+      // }).then(function(){
+      //     // Get search results from reddit
+        //   Reddit.getData($scope.query).then(function(results) {
+        //     var data = results.data.data.children;
+        //     //store results in $scope for sort
+        //     //check if data.length is greater than 10
+        //     if (data.length > 10) {
+        //       data = data.slice(0, 10);
+        //     }
+        //     $scope.redditData = data;
+        //     console.log($scope.redditData, 'redditData in presort');
+        //   });
+        // }).then(function(){
+      //     if ($scope.twitterData !== undefined && $scope.redditData !== undefined) {
+      //       // Both Twitter and reddit accounts were authorized
+
+      //       // Check whether data for both actually exists
+      //       if ($scope.twitterData.length <= 0 && $scope.redditData.length <= 0) {
+      //         Feed.setDataExists(false); // Set flag for no data found alert
+      //         $state.go('home'); // Return state to home
+      //       } else {
+      //         $scope.sort($scope.twitterData, $scope.redditData); // Invoke sort function
+      //       }
+      //     } else if ($scope.twitterData !== undefined && $scope.redditData === undefined) {
+      //       // Only Twitter authorized
+
+      //       // Check whether Twitter data actually exists
+      //       if ($scope.twitterData.length <= 0){
+      //         Feed.setDataExists(false); // Set flag for no data found alert
+      //         $state.go('home'); // Return state to home
+      //       } else {
+      //         $scope.sort($scope.twitterData, null); // Invoke sort function
+      //       }
+      //     } else if ($scope.redditData !== undefined && $scope.twitterData === undefined) {
+      //       // Only reddit authorized
+
+      //       // Check whether reddit data actually exists
+      //       if ($scope.redditData.length <= 0){
+      //         Feed.setDataExists(false); // Set flag for no data found alert
+      //         $state.go('home'); // Return state to home
+      //       } else {
+      //         $scope.sort(null, $scope.redditData); // Invoke sort function
+      //       }
+      //     }
+      //   }).catch(function(err) {
+      //     // reddit catch()
+      //     console.error(err);
+      //   })
+      // .catch(function(err) {
+      //   // Twitter catch()
+      //   console.error(err);
+      // });
+      // console.log($scope.redditData, "redditData")
+      // //<END-------------------CHANGE INSTAGRAM TO REDDIT---------------->
+      // //<END-------------------CHANGE INSTAGRAM TO REDDIT---------------->
+
+>>>>>>> fix reddit, twitter promises, send user 'home' if no results
     }
   }, true);
   
@@ -63,6 +172,24 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
     // reddit = redditData array
 
     $scope.unsorted = []; // Initialize unsorted array
+<<<<<<< 1688d5d9e5f66a7cf6f842a5f0023edf0d9296d4
+=======
+    console.log('reddit', reddit);
+    console.log('twitter', twitter);
+    
+    // if (instagram !== null) {
+    //   // Convert Instagram timestamp to be consistent with Twitter as epoch time
+
+    //   instagram.forEach(function(val){
+    //     var time = val.created_time;
+
+    //     val.created_at = parseInt(time) * 1000; // Convert Instagram created_at time to milliseconds
+    //     val.source_network = 'instagram'; // Add flag for data source
+        
+    //     $scope.unsorted.push(val); // Push each post into the unsorted array
+    //   });
+    // };
+>>>>>>> fix reddit, twitter promises, send user 'home' if no results
 
     if (twitter !== null) {              // Checks to see if Twitter data was passed
       // Convert Twitter timestamp to be consistent with Instagram as epoch time
