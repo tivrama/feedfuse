@@ -25,7 +25,6 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
       });
       //<END---------------------reddit testing---------------------------->
 
-<<<<<<< 4535f5793e4a2e607a081f25d3c24549448199ec
 
 // twitter promise
 >>>>>>> fix reddit, twitter promises, send user 'home' if no results
@@ -69,6 +68,7 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
     // reddit = redditData array
 
     $scope.unsorted = []; // Initialize unsorted array
+
 
 
     if (twitter !== null) {              // Checks to see if Twitter data was passed
