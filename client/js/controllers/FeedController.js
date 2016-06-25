@@ -11,9 +11,15 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
     if (newQuery !== null) {                     // Makes sure there is a search term
       $scope.query = newQuery; // Grab search query
 
+      //<START-------------------reddit testing---------------------------->
       Reddit.getData($scope.query).then(function(results) {
-        console.log(results);
+        console.log(results.data.data.children);
       });
+      //<END---------------------reddit testing---------------------------->
+
+
+      //<START-------------------CHANGE INSTAGRAM TO REDDIT---------------->
+      //<START-------------------CHANGE INSTAGRAM TO REDDIT---------------->
 
       Twitter.getData($scope.query).then(function(results) {
         // If Twitter was authorized, store the returned results array
@@ -24,21 +30,25 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
         } else {
           $scope.twitterData = results.data;
         }
-      }).then(function() {
-        Instagram.getData($scope.query).then(function(results) {
-          $scope.instagramData = results.data.data; // Store the returned results.data array
+      }).then(function(){
+          // Get search results from reddit
+          Reddit.getData($scope.query).then(function(results) {
+            var data = results.data.data.children;
+            //store results in $scope for sort
+            $scope.redditData = data;
+          });
         }).then(function(){
-          if ($scope.twitterData !== undefined && $scope.instagramData !== undefined) {
-            // Both Twitter and Instagram accounts were authorized
+          if ($scope.twitterData !== undefined && $scope.redditData !== undefined) {
+            // Both Twitter and reddit accounts were authorized
 
             // Check whether data for both actually exists
-            if ($scope.twitterData.length <= 0 && $scope.instagramData.length <= 0) {
+            if ($scope.twitterData.length <= 0 && $scope.redditData.length <= 0) {
               Feed.setDataExists(false); // Set flag for no data found alert
               $state.go('home'); // Return state to home
             } else {
-              $scope.sort($scope.twitterData, $scope.instagramData); // Invoke sort function
+              $scope.sort($scope.twitterData, $scope.redditData); // Invoke sort function
             }
-          } else if ($scope.twitterData !== undefined && $scope.instagramData === undefined) {
+          } else if ($scope.twitterData !== undefined && $scope.redditData === undefined) {
             // Only Twitter authorized
 
             // Check whether Twitter data actually exists
@@ -48,25 +58,28 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
             } else {
               $scope.sort($scope.twitterData, null); // Invoke sort function
             }
-          } else if ($scope.instagramData !== undefined && $scope.twitterData === undefined) {
-            // Only Instagram authorized
+          } else if ($scope.redditData !== undefined && $scope.twitterData === undefined) {
+            // Only reddit authorized
 
-            // Check whether Instagram data actually exists
-            if ($scope.instagramData.length <= 0){
+            // Check whether reddit data actually exists
+            if ($scope.redditData.length <= 0){
               Feed.setDataExists(false); // Set flag for no data found alert
               $state.go('home'); // Return state to home
             } else {
-              $scope.sort(null, $scope.instagramData); // Invoke sort function
+              $scope.sort(null, $scope.redditData); // Invoke sort function
             }
           }
         }).catch(function(err) {
-          // Instagram catch()
+          // reddit catch()
           console.error(err);
-        });
-      }).catch(function(err) {
+        })
+      .catch(function(err) {
         // Twitter catch()
         console.error(err);
       });
+      //<END-------------------CHANGE INSTAGRAM TO REDDIT---------------->
+      //<END-------------------CHANGE INSTAGRAM TO REDDIT---------------->
+
     }
   }, true);
   
