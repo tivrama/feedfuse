@@ -1,17 +1,20 @@
 <div id="spinner" ng-show="loading">
   <img src="../assets/img/spinner.gif">
 </div>
+<filter></filter>
 
-<section class="feed" ng-hide="loading">
-
+    <div class="container" ng-show="!twitterShow && !redditShow">
+    ALL POSTS HIDDEN
+    </div>
+<section class="feed" ng-hide="loading" ng-show="twitterShow || redditShow" >
 <div class="container">
   <div class="feed-post" ng-repeat="post in sorted">
     <!-- TWITTER -->
-    <div ng-if="post.source_network=='twitter'" >
+    <div ng-if="post.source_network=='twitter'" ng-show="twitterShow" >
         <blockquote twitter post="post" class="twitter-tweet"></blockquote>
     </div>
     <!-- REDDIT -->
-    <div ng-if="post.source_network=='reddit'">
+    <div ng-if="post.source_network=='reddit'" ng-show="redditShow">
         <div class="reddit-media">
 
 

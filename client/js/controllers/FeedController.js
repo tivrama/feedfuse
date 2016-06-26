@@ -11,33 +11,43 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
     if (newQuery !== null) {                     // Makes sure there is a search term
       $scope.query = newQuery; // Grab search query
 
-     // twitter promise
-     var twitterGet = Twitter.getData($scope.query).then(function(results) {
-       // If Twitter was authorized, store the returned results array
-       // If not, set it to undefined
 
-       if (!results.data) {
-         $scope.twitterData = undefined;
-       } else {
-         $scope.twitterData = results.data;
-       }
-     });
 
-     //reddit promise
-     var redditGet =  Reddit.getData($scope.query).then(function(results) {
-       var data = results.data.data.children;
-       //store results in $scope for sort
-       //check if data.length is greater than 10
-       if (data.length > 10) {
-         data = data.slice(0, 10);
-       }
-       $scope.redditData = data;
-       console.log($scope.redditData, 'redditData in presort');
-     });
+      // twitter promise
+      var twitterGet = Twitter.getData($scope.query).then(function(results) {
+        // If Twitter was authorized, store the returned results array
+        // If not, set it to undefined
+        if (!results.data) {
+          $scope.twitterData = undefined;
+        } else {
+          $scope.twitterData = results.data;
+        }
+      });
 
-     $q.all([twitterGet, redditGet]).then(function() {
-       $scope.sort($scope.twitterData, $scope.redditData);
-     });
+      //reddit promise
+      var redditGet =  Reddit.getData($scope.query).then(function(results) {
+        var data = results.data.data.children;
+        //store results in $scope for sort
+        //check if data.length is greater than 10
+        if (data.length > 10) {
+          //get first 10 results
+          data = data.slice(0, 10);
+        }
+        //add results to $scope
+        $scope.redditData = data;
+        console.log($scope.redditData, 'redditData in presort');
+      });
+
+      //when both twitter and reddit come back
+      $q.all([twitterGet, redditGet]).then(function() {
+        //check if no results
+        console.log('rData', $scope.redditData, 'tData', $scope.twitterData);
+        if (!$scope.twitterData && !$scope.redditData) {
+          Feed.setDataExists(false); // Set flag for no data found alert
+          $state.go('home'); // Return state to home
+        }
+        $scope.sort($scope.twitterData, $scope.redditData);
+      });
     }
   }, true);
   
@@ -51,6 +61,8 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
     // reddit = redditData array
 
     $scope.unsorted = []; // Initialize unsorted array
+
+
 
     if (twitter !== null) {              // Checks to see if Twitter data was passed
       // Convert Twitter timestamp to be consistent with Instagram as epoch time
@@ -140,6 +152,20 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
         $scope.refreshWidgets();
       }, 2500);
     });
+  };
+
+  //set filters to true
+  $scope.twitterShow = true;
+  $scope.redditShow = true;
+
+  //toggle filters
+  $scope.toggleTwitterShow = function() {
+    $scope.twitterShow = !$scope.twitterShow;
+    $scope.refreshWidgets();
+  };
+
+  $scope.toggleRedditShow = function() {
+    $scope.redditShow = !$scope.redditShow;
   };
   
 });
