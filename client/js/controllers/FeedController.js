@@ -48,6 +48,7 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
         }
         $scope.sort($scope.twitterData, $scope.redditData);
       });
+    }
   }, true);
   
 
