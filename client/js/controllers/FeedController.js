@@ -17,7 +17,7 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
       var twitterGet = Twitter.getData($scope.query).then(function(results) {
         // If Twitter was authorized, store the returned results array
         // If not, set it to undefined
-        if (!results.data) {
+        if (!results.data.data) {
           $scope.twitterData = undefined;
         } else {
           $scope.twitterData = results.data;
@@ -26,15 +26,22 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
 
       //reddit promise
       var redditGet =  Reddit.getData($scope.query).then(function(results) {
-        var data = results.data.data.children;
-        //store results in $scope for sort
-        //check if data.length is greater than 10
-        if (data.length > 10) {
-          //get first 10 results
-          data = data.slice(0, 10);
+        console.log('resultsReddit', results);
+
+        if (results.data.data) {
+          var data = results.data.data.children;
+          //store results in $scope for sort
+          //check if data.length is greater than 10
+          if (data.length > 10) {
+            //get first 10 results
+            data = data.slice(0, 10);
+          }
+          //add results to $scope
+          $scope.redditData = data;
+        } else {
+          //make data undefined
+          $scope.redditData = undefined;
         }
-        //add results to $scope
-        $scope.redditData = data;
         console.log($scope.redditData, 'redditData in presort');
       });
 
@@ -64,7 +71,7 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
 
 
 
-    if (twitter !== null) {              // Checks to see if Twitter data was passed
+    if (twitter !== undefined) {              // Checks to see if Twitter data was passed
       // Convert Twitter timestamp to be consistent with Instagram as epoch time
       twitter.forEach(function(val){
         var time = val.created_at;
@@ -78,7 +85,7 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
       });
     };
 
-    if (reddit !== null) {              // Checks to see if Reddit data was passed
+    if (reddit !== undefined) {              // Checks to see if Reddit data was passed
       // Convert Reddit timestamp to be consistent with Twitter as epoch time
       reddit.forEach(function(val){
         var time = val.data.created_utc; //EXAMPLE 1305208232.0
