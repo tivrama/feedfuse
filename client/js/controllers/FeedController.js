@@ -17,7 +17,7 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
       var twitterGet = Twitter.getData($scope.query).then(function(results) {
         // If Twitter was authorized, store the returned results array
         // If not, set it to undefined
-        if (!results.data.data) {
+        if (!results.data) {
           $scope.twitterData = undefined;
         } else {
           $scope.twitterData = results.data;
