@@ -10,7 +10,7 @@ var Config          = require('../config/config');  // Contains API Keys
 var twitter = new twitterAPI({                              // Creates a new instance of our 'node-twitter-api' module
   consumerKey: Config.twitterConfig.key,                    // FeedFuse app key
   consumerSecret: Config.twitterConfig.secret,              // FeedFuse app secret key
-  callback: "http://127.0.0.1:5000/auth/twitter/callback"   // Redirect-callback URL after /auth/twitter redirect passes
+  callback: "https://feedfuse.herokuapp.com/auth/twitter/callback"   // Redirect-callback URL after /auth/twitter redirect passes
 });
   
 module.exports = function(app) {
