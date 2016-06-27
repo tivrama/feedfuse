@@ -1,15 +1,23 @@
 <div class="filter">
   <br>
-  <div class="">
+  <div >
     <div class="container hide-msg" ng-show="!twitterShow && !redditShow">
     ALL POSTS HIDDEN
     </div>
-    <div>
-      <button type="button" id="filterTwitter" class="btn btn-twitter" ng-click="toggleTwitterShow()" ></button>
-    </div>
-    <div>
-      <button type="button" id="filterReddit" class="btn btn-reddit" ng-click="toggleRedditShow()" ></button>
-    </div>
+    <table>
+      <tr>
+        <td>
+          <div>
+            <button type="button" id="filterTwitter" class="btn btn-twitter" ng-click="toggleTwitterShow()" ></button>
+          </div>
+        </td>
+        <td>
+          <div>
+            <button type="button" id="filterReddit" class="btn btn-reddit" ng-click="toggleRedditShow()" ></button>
+          </div>
+        </td>
+      </tr>
+    </table>
   </div>
   <br>
 </div>
