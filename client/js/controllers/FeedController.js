@@ -25,7 +25,6 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
 
       //reddit promise
       var redditGet =  Reddit.getData($scope.query).then(function(results) {
-        console.log('resultsReddit', results);
 
         if (results.data.data) {
           var data = results.data.data.children;

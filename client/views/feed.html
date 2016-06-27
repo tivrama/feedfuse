@@ -28,12 +28,6 @@
 
                         <div class="redditcontainer" ng-class="{show: show}"> {{ post.data.selftext }} </div>
                         <button ng-hide="show" class="redditMore" ng-click="show = true">Show text</button>
-
-                        <img ng-src='{{ post.data.thumbnail }}' on-error="../assets/img/FF4D00-0..png"></img><br>
-
-                        <a href='{{ post.data.url }}' target='_blank' class='title'>{{ post.data.title }}</a>
-                        <p class='author'> {{ post.data.author }}</p>
-                        <p> {{ post.data.selftext }}</p>
                     </div>
                 </div>
             </div>
