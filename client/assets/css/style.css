@@ -610,6 +610,30 @@ input[type='text'] {
   width: 50px
 }
 
+.redditWrap {
+  width:480px; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
+
+    .redditcontainer {
+         font-size: 16px;
+         line-height: 16px;
+         height: 32px;
+         overflow: hidden;
+    }
+    .redditshow {
+         overflow: visible;
+         height: auto;
+    }
+
+
+
+
+
 .feed-post {
   position: relative;
 }
