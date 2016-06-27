@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node server/server.js",
     "postinstall": [
-      "bower install",
-      "gulp"
+      "node bower install",
+      "node gulp"
     ],
     "test": "npm test"
   },
