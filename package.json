@@ -4,7 +4,8 @@
   "description": "View all your social media in one feed",
   "main": "server/server.js",
   "scripts": {
-    "start": "nodemon server/server.js",
+    "start": "node server/server.js",
+    "postinstall": ["node bower install", "node gulp"],
     "test": "npm test"
   },
   "repository": {
