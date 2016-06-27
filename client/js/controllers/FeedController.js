@@ -7,10 +7,9 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
   }, function(newQuery, oldQuery) {
     // newQuery - current listener call
     // oldQuery - previous listener call
-
+    
     if (newQuery !== null) {                     // Makes sure there is a search term
       $scope.query = newQuery; // Grab search query
-
 
 
       // twitter promise
@@ -26,7 +25,6 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
 
       //reddit promise
       var redditGet =  Reddit.getData($scope.query).then(function(results) {
-        console.log('resultsReddit', results);
 
         if (results.data.data) {
           var data = results.data.data.children;
@@ -42,13 +40,13 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
           //make data undefined
           $scope.redditData = undefined;
         }
-        console.log($scope.redditData, 'redditData in presort');
+        //add results to $scope
+        $scope.redditData = data;
       });
 
       //when both twitter and reddit come back
       $q.all([twitterGet, redditGet]).then(function() {
         //check if no results
-        console.log('rData', $scope.redditData, 'tData', $scope.twitterData);
         if (!$scope.twitterData && !$scope.redditData) {
           Feed.setDataExists(false); // Set flag for no data found alert
           $state.go('home'); // Return state to home
@@ -114,7 +112,6 @@ angular.module('ff.controllers').controller('FeedController', function($scope, F
     };
 
     $scope.sorted = shuffleRedditAndTwitter($scope.firstSort);// = shuffled reddit and twitter
-    console.log('soted everything: ', $scope.sorted);
     //-------end shuffle---------------------------------------------
 
 
