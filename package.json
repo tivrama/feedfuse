@@ -5,7 +5,10 @@
   "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js",
-    "postinstall": ["node bower install", "node gulp"],
+    "postinstall": [
+      "bower install",
+      "gulp"
+    ],
     "test": "npm test"
   },
   "repository": {
@@ -20,6 +23,7 @@
   "homepage": "https://github.com/woebegonegraybeards/feedfuse#readme",
   "dependencies": {
     "body-parser": "^1.15.1",
+    "bower": "^1.7.9",
     "connect-ensure-login": "^0.1.1",
     "cookie-parser": "^1.4.3",
     "cookie-session": "^1.2.0",
