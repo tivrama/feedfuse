@@ -1,39 +1,42 @@
-<filter ng-hide="loading"></filter>
+<div>
+    <searchbar ng-controller="MainController"></searchbar>
 
-<div id="spinner" ng-show="loading">
-  <img src="../assets/img/spinner.gif">
-</div>
+    <filter ng-hide="loading"></filter>
+    <div class="container" ng-show="!twitterShow && !redditShow">ALL POSTS HIDDEN</div>
 
-<section class="feed" ng-hide="loading" ng-show="twitterShow || redditShow" >
-<div class="container">
-  <div class="feed-post" ng-repeat="post in sorted track by $index">
-    <!-- TWITTER -->
-    <div ng-if="post.source_network=='twitter'" ng-show="twitterShow" >
-        <blockquote twitter post="post" class="twitter-tweet"></blockquote>
+    <div id="spinner" ng-show="loading">
+        <img src="../assets/img/spinner.gif">
     </div>
-    <!-- REDDIT -->
-    <div ng-if="post.source_network=='reddit'" ng-show="redditShow">
-        <div class="reddit-media">
-        <div class="redditLogo">
-        <img ng-src="../assets/img/1466914098_reddit.png" style="width: auto; height: auto;max-width: 50px;max-height: 50px"></img>
-        </div>
-            <img ng-src='{{ post.data.thumbnail }}' on-error="../assets/img/FF4D00-0..png"></img><br>
-            <a href='{{ post.data.url }}' target='_blank' class='title'>{{ post.data.title }}</a>
-            <p class='author'> {{ post.data.author }}</p>
 
+    <section class="feed" ng-hide="loading" ng-show="twitterShow || redditShow" >
+        <div class="container">
+            <div class="feed-post" ng-repeat="post in sorted track by $index">
+                <!-- TWITTER -->
+                <div ng-if="post.source_network=='twitter'" ng-show="twitterShow" >
+                    <blockquote twitter post="post" class="twitter-tweet"></blockquote>
+                </div>
+                <!-- REDDIT -->
+                <div ng-if="post.source_network=='reddit'" ng-show="redditShow">
+                    <div class="reddit-media">
+                        <div class="redditLogo">
+                            <img ng-src="../assets/img/1466914098_reddit.png" style="width: auto; height: auto;max-width: 50px;max-height: 50px"></img>
+                        </div>
 
-            <div class="redditcontainer" ng-class="{show: show}">
-            {{ post.data.selftext }}
+                        <img ng-src='{{ post.data.thumbnail }}' on-error="../assets/img/FF4D00-0..png"></img><br>
+                        <a href='{{ post.data.url }}' target='_blank' class='title'>{{ post.data.title }}</a>
+                        <p class='author'> {{ post.data.author }} </p>
+
+                        <div class="redditcontainer" ng-class="{show: show}"> {{ post.data.selftext }} </div>
+                        <button ng-hide="show" class="redditMore" ng-click="show = true">Show text</button>
+
+                        <img ng-src='{{ post.data.thumbnail }}' on-error="../assets/img/FF4D00-0..png"></img><br>
+
+                        <a href='{{ post.data.url }}' target='_blank' class='title'>{{ post.data.title }}</a>
+                        <p class='author'> {{ post.data.author }}</p>
+                        <p> {{ post.data.selftext }}</p>
+                    </div>
+                </div>
             </div>
-            <button ng-hide="show" class="redditMore" ng-click="show = true">Show text</button>
-
-
-
-
-
         </div>
-    </div>
-  </div>
+    </section>
 </div>
-
-</section>

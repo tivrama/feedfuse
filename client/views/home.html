@@ -1,15 +1,13 @@
 <div class="container">
 
-<div class="tagline">
-  <h1>One feed. No fluff.</h1>
-</div>
+  <div class="tagline">
+    <h1>One feed. No fluff.</h1>
+  </div>
 
-<div class="login">  
+  <div class="login">  
+    <a href="auth/twitter" class="btn btn-twitter">Authorize with Twitter <img src='./assets/img/green-check.png' ng-show='twitterCheckShow' class='green-check' width='25px' height='25px' /> </a>
+    <searchbar></searchbar>
+  </div>
 
-  <a href="auth/twitter" class="btn btn-twitter">Authorize with Twitter <img src='./assets/img/green-check.png' ng-show='twitterCheckShow' class='green-check' width='25px' height='25px' /> </a>
-
-  <div ng-include="'views/searchbar.html'"></div>
-  
-</div>
 
 </div>
