@@ -9,8 +9,8 @@
     "postinstall": "bower install",
 =======
     "postinstall": [
-      "node bower install",
-      "node gulp"
+      "bower install",
+      "gulp"
     ],
 >>>>>>> Package json changes
     "test": "npm test"
