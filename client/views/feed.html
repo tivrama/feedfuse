@@ -1,11 +1,8 @@
+<filter ng-hide="loading"></filter>
 <div id="spinner" ng-show="loading">
   <img src="../assets/img/spinner.gif">
 </div>
-<filter></filter>
 
-    <div class="container" ng-show="!twitterShow && !redditShow">
-    ALL POSTS HIDDEN
-    </div>
 <section class="feed" ng-hide="loading" ng-show="twitterShow || redditShow" >
 <div class="container">
   <div class="feed-post" ng-repeat="post in sorted track by $index">
