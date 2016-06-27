@@ -621,28 +621,29 @@ table {
 
 }
 
-.redditWrap {
+
+.redditcontainer {
+  font-size: 16px;
+  line-height: 16px;
+  height: 50px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   width:480px; 
+}
+.show {
+  width:480px;
+  height: auto; 
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-
-
-
-    .redditcontainer {
-         font-size: 16px;
-         line-height: 16px;
-         height: 32px;
-         overflow: hidden;
-    }
-    .redditshow {
-         overflow: visible;
-         height: auto;
-    }
-
-
-
+.redditMore {
+  font-style: italic;
+  font-size: 14px;
+  border: none;
+  background-color: white;
+  color: blue;
+}
 
 
 .feed-post {

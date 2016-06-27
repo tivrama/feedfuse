@@ -21,13 +21,11 @@
             <p class='author'> {{ post.data.author }}</p>
 
 
-
             <div class="redditcontainer" ng-class="{show: show}">
-                <p ng-text-truncate="longText"
-   ng-tt-chars-threshold="40"> {{ post.data.selftext }}</p>
-            <button ng-click="show = true">Show text</button>
-
+            {{ post.data.selftext }}
             </div>
+            <button ng-hide="show" class="redditMore" ng-click="show = true">Show text</button>
+
 
 
 
