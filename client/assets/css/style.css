@@ -591,23 +591,33 @@ input[type='text'] {
 }
 
 .filter {
-  display: inline-block;
-  text-align: center
+  display: inline;
 }
+
+.filter .hide-msg {
+  text-align: center;
+  color: #8032A2;
+  background-color: grey;
+  max-width:30%;
+  border-radius: 5px;
+  
+}
+
 #filterReddit {
   background: url("http://icons.iconarchive.com/icons/limav/flat-gradient-social/512/Reddit-icon.png");
   color: #fff;
   background-size: 100%;
   height: 50px;
-  width: 50px
-
+  width: 50px;
 }
+
 #filterTwitter {
-  background: url("https://cdn1.iconfinder.com/data/icons/logotypes/32/twitter-128.png");
+  background: url("http://icons.iconarchive.com/icons/limav/flat-gradient-social/512/Twitter-icon.png");
   background-size: 100%;
   color: #fff;
   height: 50px;
   width: 50px
+
 }
 
 .feed-post {
