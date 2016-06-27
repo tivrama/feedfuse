@@ -5,7 +5,14 @@
   "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js",
+<<<<<<< c2d35c9e984d7c688aa5158cbcccc00548c80aa0
     "postinstall": "bower install",
+=======
+    "postinstall": [
+      "bower install",
+      "gulp"
+    ],
+>>>>>>> Package json changes
     "test": "npm test"
   },
   "repository": {
