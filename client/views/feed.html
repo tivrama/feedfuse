@@ -1,12 +1,15 @@
 <div>
-    <searchbar ng-controller="MainController"></searchbar>
+
+    <div class="login" ng-hide="loading">  
+        <searchbar ng-controller="MainController"></searchbar>
+    </div>
 
     <filter ng-hide="loading"></filter>
-    <div class="container" ng-show="!twitterShow && !redditShow">ALL POSTS HIDDEN</div>
-
+    
     <div id="spinner" ng-show="loading">
         <img src="../assets/img/spinner.gif">
     </div>
+
 
     <section class="feed" ng-hide="loading" ng-show="twitterShow || redditShow" >
         <div class="container">
