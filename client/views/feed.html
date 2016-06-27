@@ -16,14 +16,25 @@
     <!-- REDDIT -->
     <div ng-if="post.source_network=='reddit'" ng-show="redditShow">
         <div class="reddit-media">
-
-
+        <div class="redditLogo">
+        <img ng-src="../assets/img/1466914098_reddit.png" style="width: auto; height: auto;max-width: 50px;max-height: 50px"></img>
+        </div>
             <img ng-src='{{ post.data.thumbnail }}' on-error="../assets/img/FF4D00-0..png"></img><br>
-
-
             <a href='{{ post.data.url }}' target='_blank' class='title'>{{ post.data.title }}</a>
             <p class='author'> {{ post.data.author }}</p>
-            <p> {{ post.data.selftext }}</p>
+
+
+
+            <div class="redditcontainer" ng-class="{show: show}">
+                <p ng-text-truncate="longText"
+   ng-tt-chars-threshold="40"> {{ post.data.selftext }}</p>
+            <button ng-click="show = true">Show text</button>
+
+            </div>
+
+
+
+
         </div>
     </div>
   </div>
